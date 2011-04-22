@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
   validates :stream, :presence => true
   validates :starts_at, :presence => true
   validates :ends_at, :presence => true
+  validates :room, :presence => true
   
 end
 
