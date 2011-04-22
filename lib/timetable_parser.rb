@@ -30,22 +30,27 @@ class TimetableParser
         detail
       end
   
-      y details[6][:crn]
-      y details[6][:crn].to_i
-      # details.each do |d|
-      #         begin
-      #           make_course(d)
-      #         rescue ActiveRecord::RecordInvalid, NoMethodError
-      #         end
-      #       end
+      # y details[6][:crn]
+      #       y details[6][:crn].to_i
+      details.each do |d|
+        begin
+          if d[:crn].to_i.eql? 0
+            next
+          end
+          make_course(d)
+        rescue ActiveRecord::RecordInvalid, NoMethodError => error
+          p error
+        end
+      end
     
       f.close
     end
   
     def make_course(detail)
+      
       course = Course.find_or_create_by_course_and_code(:course => detail[:course], :code => detail[:code])
       
-      stream = Stream.find_or_create_by_crn(detail[:crn].to_i)
+      stream = Stream.find_or_create_by_crn(detail[:crn].to_i, :course => course)
       
       stream.events << make_events( stream, detail[:type], detail[:dates],
                                     detail[:days], detail[:start], detail[:finish], 
@@ -53,9 +58,9 @@ class TimetableParser
       
       course.streams << stream
       
-      y course
+      course
     end
-    
+                  
     def make_events(stream, type, dates, day_initials, start, finish, room)
       
       events = []
@@ -73,7 +78,18 @@ class TimetableParser
         end_time = finish.split(/:/)
         ends_at = date + end_time[0].to_i.hours + end_time[1].to_i.minutes
         
-        events << Event.create_or_find_by_stream_and_starts_at(:stream=>stream, :starts_at => starts_at, :ends_at => ends_at)
+        p start_time
+        p starts_at
+        
+        p end_time
+        p ends_at
+        
+        puts "\n\n\n\n\n"
+        
+        event = Event.find_or_create_by_stream_id_and_starts_at(:stream=>stream, 
+            :starts_at => starts_at, :ends_at => ends_at,
+            :room => room)
+        events << event
       end
         
       events
