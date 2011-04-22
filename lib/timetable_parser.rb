@@ -78,14 +78,6 @@ class TimetableParser
         end_time = finish.split(/:/)
         ends_at = date + end_time[0].to_i.hours + end_time[1].to_i.minutes
         
-        p start_time
-        p starts_at
-        
-        p end_time
-        p ends_at
-        
-        puts "\n\n\n\n\n"
-        
         event = Event.find_or_create_by_stream_id_and_starts_at(:stream=>stream, 
             :starts_at => starts_at, :ends_at => ends_at,
             :room => room)
