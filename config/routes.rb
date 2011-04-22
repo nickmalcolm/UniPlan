@@ -1,4 +1,10 @@
 Uniplan::Application.routes.draw do
+  resources :events
+
+  resources :streams
+
+  resources :courses
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
