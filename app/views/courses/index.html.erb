@@ -3,19 +3,33 @@
 <table>
   <tr>
     <th>Course</th>
-    <th>Code</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @courses.each do |course| %>
-  <tr>
-    <td><%= course.course %></td>
-    <td><%= course.code %></td>
+  <tr style="font-weight: bold;font-size: 110%">
+    <td><%= course.course %><%= course.code %></td>
     <td><%= link_to 'Show', course %></td>
     <td><%= link_to 'Edit', edit_course_path(course) %></td>
     <td><%= link_to 'Destroy', course, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+  <tr>
+    <td>
+      <ul>
+        <% course.streams.each do |stream| %>
+          <li>
+            <em>Stream <%= stream.crn %></em>
+            <ul>
+              <% stream.events.each do |event| %>
+                <li><%= "#{event.starts_at.strftime('%H:%M %a')} - #{event.ends_at.strftime('%H:%M %a')}"%>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </td>
   </tr>
 <% end %>
 </table>
