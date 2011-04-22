@@ -23,7 +23,7 @@
             <em>Stream <%= stream.crn %></em>
             <ul>
               <% stream.events.each do |event| %>
-                <li><%= "#{event.starts_at.strftime('%H:%M %a')} - #{event.ends_at.strftime('%H:%M %a')} in #{event.room}"%>
+                <li><%= "#{event.starts_at.strftime('%H:%M')}-#{event.ends_at.strftime('%H:%M')} on #{event.starts_at.strftime('%A')}s in #{event.room}"%>
               <% end %>
             </ul>
           </li>
