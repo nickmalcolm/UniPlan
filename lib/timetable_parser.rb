@@ -80,6 +80,8 @@ class TimetableParser
   
     def make_course(course_attrs)
       
+      puts "."
+      
       course = Course.find_or_create_by_course_and_code(
                   :course => course_attrs[:course][:course], 
                   :code => course_attrs[:course][:code])
@@ -87,11 +89,22 @@ class TimetableParser
       stream = Stream.find_or_create_by_crn(course_attrs[:stream][:crn].to_i)
       stream.update_attributes(:course => course)
       
-      stream.events << make_events( stream, course_attrs[:event])
+      stream.events << make_events(stream, course_attrs[:event])
       
-      course.streams << stream
+      #Streams should have events otherwise we don't care
+      #And we don't care about courses without streams
       
-      course
+      if stream.events.none?
+        stream.destroy
+      else
+        course.streams << stream
+      end
+      
+      if course.streams.none?
+        course.destroy
+      else
+        course
+      end
     end
                   
     def make_events(stream, event_details)
@@ -101,20 +114,23 @@ class TimetableParser
       
       date = get_date(event_details[:dates])
       
-      days.each do |d|
-        date = add_day_of_week(date, d)
+      unless date.nil?
+        days.each do |d|
+          date = add_day_of_week(date, d)
         
-        start_time = event_details[:start].split(/:/)
-        starts_at = date + start_time[0].to_i.hours + start_time[1].to_i.minutes
+          start_time = event_details[:start].split(/:/)
+          starts_at = date + start_time[0].to_i.hours + start_time[1].to_i.minutes
         
-        end_time = event_details[:finish].split(/:/)
-        ends_at = date + end_time[0].to_i.hours + end_time[1].to_i.minutes
+          end_time = event_details[:finish].split(/:/)
+          ends_at = date + end_time[0].to_i.hours + end_time[1].to_i.minutes
         
-        event = Event.find_or_create_by_stream_id_and_starts_at(:stream=>stream, :starts_at => starts_at)
+          event = Event.find_or_create_by_starts_at_and_ends_at_and_room(
+                    :starts_at => starts_at, :ends_at => ends_at, 
+                    :room => event_details[:room])
+          event.update_attributes(:stream => stream)
             
-        event.update_attributes(:ends_at => ends_at, :room => event_details[:room])
-            
-        events << event
+          events << event
+        end
       end
         
       events
@@ -141,6 +157,7 @@ class TimetableParser
     
     def add_day_of_week(date, day_initial)
       case day_initial.upcase
+      # Monday is + 0 days
       when "T"
         date = date + 1.day
       when "W"
