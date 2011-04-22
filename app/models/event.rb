@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   
   belongs_to :stream
   
+  validates :stream, :presence => true
   validates :starts_at, :presence => true
   validates :ends_at, :presence => true
   
