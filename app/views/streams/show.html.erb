@@ -1,9 +1,17 @@
 <p id="notice"><%= notice %></p>
 
+<h2><%= @stream.crn %></h2>
+
 <p>
-  <b>Crn:</b>
-  <%= @stream.crn %>
+  For <%= link_to @stream.course.short_title, @stream.course %>
 </p>
+
+<h3>Events</h3>
+<ul>
+  <% @stream.events.each do |event| %>
+    <li><%= link_to "#{event.starts_at.strftime('%H:%M')}-#{event.ends_at.strftime('%H:%M')} on #{event.starts_at.strftime('%A')}s in #{event.room}", event %>
+  <% end %>
+</ul>
 
 
 <%= link_to 'Edit', edit_stream_path(@stream) %> |

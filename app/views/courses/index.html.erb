@@ -20,10 +20,10 @@
       <ul>
         <% course.streams.each do |stream| %>
           <li>
-            <em>Stream <%= stream.crn %></em>
+            <em>Stream <%= link_to stream.crn, stream %></em>
             <ul>
               <% stream.events.each do |event| %>
-                <li><%= "#{event.starts_at.strftime('%H:%M')}-#{event.ends_at.strftime('%H:%M')} on #{event.starts_at.strftime('%A')}s in #{event.room}"%>
+                <li><%= link_to "#{event.starts_at.strftime('%H:%M')}-#{event.ends_at.strftime('%H:%M')} on #{event.starts_at.strftime('%A')}s in #{event.room}", event %>
               <% end %>
             </ul>
           </li>

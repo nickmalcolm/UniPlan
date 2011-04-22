@@ -1,14 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Course:</b>
-  <%= @course.course %>
-</p>
+<h2><%= @course.short_title %></h2>
 
-<p>
-  <b>Code:</b>
-  <%= @course.code %>
-</p>
+<ul>
+  <% @course.streams.each do |stream| %>
+    <li>
+      <em>Stream <%= link_to stream.crn, stream %></em>
+      <ul>
+        <% stream.events.each do |event| %>
+          <li><%= link_to "#{event.starts_at.strftime('%H:%M')}-#{event.ends_at.strftime('%H:%M')} on #{event.starts_at.strftime('%A')}s in #{event.room}", event %>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
 
 
 <%= link_to 'Edit', edit_course_path(@course) %> |
