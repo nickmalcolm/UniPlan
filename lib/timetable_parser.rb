@@ -22,10 +22,10 @@ class TimetableParser
            }
   
   class << self
-    def parse(url = "")
+    def parse(file_path)
       puts "Parsing Timetable...\n"
   
-      f = File.open("lib/timetables/victoria/small_20110420.html")
+      f = File.open(file_path)
       doc = Nokogiri::HTML(f)
   
       rows = doc.xpath('//tr')
