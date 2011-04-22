@@ -2,7 +2,7 @@ require 'test_helper'
 
 class StreamsControllerTest < ActionController::TestCase
   setup do
-    @stream = streams(:one)
+    @stream = Factory(:stream)
   end
 
   test "should get index" do
@@ -18,10 +18,10 @@ class StreamsControllerTest < ActionController::TestCase
 
   test "should create stream" do
     assert_difference('Stream.count') do
-      post :create, :stream => @stream.attributes
+      post :create, :stream => Factory(:stream)
     end
 
-    assert_redirected_to stream_path(assigns(:stream))
+    assert_response :success
   end
 
   test "should show stream" do
