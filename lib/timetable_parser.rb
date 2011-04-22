@@ -50,7 +50,8 @@ class TimetableParser
       
       course = Course.find_or_create_by_course_and_code(:course => detail[:course], :code => detail[:code])
       
-      stream = Stream.find_or_create_by_crn(detail[:crn].to_i, :course => course)
+      stream = Stream.find_or_create_by_crn(detail[:crn].to_i)
+      stream.update_attributes(:course => course)
       
       stream.events << make_events( stream, detail[:type], detail[:dates],
                                     detail[:days], detail[:start], detail[:finish], 
@@ -62,7 +63,6 @@ class TimetableParser
     end
                   
     def make_events(stream, type, dates, day_initials, start, finish, room)
-      
       events = []
       
       days = day_initials.split(//)
@@ -78,9 +78,10 @@ class TimetableParser
         end_time = finish.split(/:/)
         ends_at = date + end_time[0].to_i.hours + end_time[1].to_i.minutes
         
-        event = Event.find_or_create_by_stream_id_and_starts_at(:stream=>stream, 
-            :starts_at => starts_at, :ends_at => ends_at,
-            :room => room)
+        event = Event.find_or_create_by_stream_id_and_starts_at(:stream=>stream, :starts_at => starts_at)
+            
+        event.update_attributes(:ends_at => DateTime.now, :room => room)
+            
         events << event
       end
         
