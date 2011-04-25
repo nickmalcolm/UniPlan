@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Uniplan::Application.load_tasks
+Uniplanner::Application.load_tasks

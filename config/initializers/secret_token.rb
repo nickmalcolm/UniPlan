@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Uniplan::Application.config.secret_token = 'd86494c2dfac84861b07ad898150e2bad26b71495919543686dcd97879d11154bafb6753ca12cdd7ab70072f7db778d75480022b0a08477b4f448f2aa16c240e'
+Uniplanner::Application.config.secret_token = '184a1259ed98cc13466c2dc7f40931ac89b9937e83ce109b3804bae5d52493877da61a930cff612c0178bb9d930d134df72330fc19ac23db8035437c8bff6f2a'

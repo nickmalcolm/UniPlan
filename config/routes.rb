@@ -1,4 +1,4 @@
-Uniplan::Application.routes.draw do
+Uniplanner::Application.routes.draw do
   resources :events
 
   resources :streams

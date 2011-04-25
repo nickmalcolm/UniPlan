@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.xml
   def index
-    @courses = Course.preload(:streams).preload(:events).all.paginate(:per_page => 20, :page => params[:page], :order => 'created_at DESC')
+    @courses = Course.paginate(:per_page => 20, :page => params[:page], :order => 'course, code')
 
     respond_to do |format|
       format.html # index.html.erb
