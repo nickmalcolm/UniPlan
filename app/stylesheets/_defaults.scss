@@ -9,6 +9,7 @@
 
 @import "base";
 @import "susy/reset";
+@import "compass/css3/font-face";
 
 /* Typography -------------------------------------------------------------- */
 /* The following classes are for use with @extend. */
@@ -18,13 +19,13 @@ html {
   -webkit-font-smoothing: antialiased; }
 
 .serif {
-  @include serif-family; }
+  @include chunk-family; }
 
 .sans {
-  @include sans-family; }
+  @include chunk-family; }
 
 .mono {
-  @include monospace-family; }
+  @include chunk-family; }
 
 .caps {
   letter-spacing: 0.1em; }
@@ -40,7 +41,7 @@ html {
 /* Body -------------------------------------------------------------- */
 
 body {
-  @extend .serif;
+  
   color: $base; }
 
 /* Selected Text -------------------------------------------------------------- */
@@ -78,11 +79,15 @@ a {
 /* Headings -------------------------------------------------------------- */
 
 h2, h3, h4, h5, h6 {
-  @include trailer; }
+  @include trailer; 
+	font-family: "ChunkFiveRegular";
+	}
 
-h1 {
+h1 {	
+	font-family: "ChunkFiveRegular";
   @include adjust-font-size-to(21px);
-  @include trailer(1, 21px); }
+  @include trailer(1, 21px);
+}
 
 h1, h2 {
   @extend .allcaps; }
@@ -236,7 +241,7 @@ label {
 // box-sizing helps us control the width of inputs
 // which are otherwise very hard to manage in the grid.
 .textinput {
-  @include sans-family;
+  
   @include adjust-font-size-to(14px, 1, 16px);
   @include rhythm-borders(1px, 0.25, 14px);
   @include trailer(0.5);

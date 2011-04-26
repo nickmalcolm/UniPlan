@@ -26,16 +26,22 @@ $alt: #005498;
 
 // Fonts --------------------------------------------------------------
 
-@mixin sans-family {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+@font-face {
+    font-family: 'ChunkFiveRegular';
+    src: url('public/fonts/chunkfive/Chunkfive-webfont.eot');
+    src: url('public/fonts/chunkfive/Chunkfive-webfont.eot?#iefix') format('embedded-opentype'),
+         url('public/fonts/chunkfive/Chunkfive-webfont.woff') format('woff'),
+         url('public/fonts/chunkfive/Chunkfive-webfont.ttf') format('truetype'),
+         url('public/fonts/chunkfive/Chunkfive-webfont.svg#ChunkFiveRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
-@mixin serif-family {
-  font-family: Cambria, Georgia, serif;
-}
-
-@mixin monospace-family {
-  font-family: "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, Courier, monospace, sans-serif;
+@mixin chunk-family{
+	font-family: "ChunkFiveRegular"
 }
 
 // OTHER MIXINS --------------------------------------------------------------
