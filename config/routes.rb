@@ -1,4 +1,6 @@
 Uniplanner::Application.routes.draw do
+  resources :timetables
+
   root :to => "home#index"
 
   resources :events

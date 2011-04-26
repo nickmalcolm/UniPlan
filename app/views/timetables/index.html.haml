@@ -1,0 +1,17 @@
+%h1 Listing timetables
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @timetables.each do |timetable|
+    %tr
+      %td= link_to 'Show', timetable
+      %td= link_to 'Edit', edit_timetable_path(timetable)
+      %td= link_to 'Destroy', timetable, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Timetable', new_timetable_path
