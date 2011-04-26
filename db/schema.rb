@@ -10,11 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110426101620) do
+ActiveRecord::Schema.define(:version => 20110426104330) do
 
   create_table "courses", :force => true do |t|
     t.string   "course"
     t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "enrollments", :force => true do |t|
+    t.integer  "stream_id"
+    t.integer  "timetable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

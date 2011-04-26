@@ -1,0 +1,16 @@
+= form_for @enrollment do |f|
+  -if @enrollment.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@enrollment.errors.count, "error")} prohibited this enrollment from being saved:"
+      %ul
+        - @enrollment.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :belongs_to
+    = f.text_field :belongs_to
+  .field
+    = f.label :belongs_to
+    = f.text_field :belongs_to
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,21 @@
+%h1 Listing enrollments
+
+%table
+  %tr
+    %th Belongs to
+    %th Belongs to
+    %th
+    %th
+    %th
+
+  - @enrollments.each do |enrollment|
+    %tr
+      %td= enrollment.belongs_to
+      %td= enrollment.belongs_to
+      %td= link_to 'Show', enrollment
+      %td= link_to 'Edit', edit_enrollment_path(enrollment)
+      %td= link_to 'Destroy', enrollment, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Enrollment', new_enrollment_path

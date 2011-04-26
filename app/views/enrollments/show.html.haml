@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Belongs to:
+  = @enrollment.belongs_to
+%p
+  %b Belongs to:
+  = @enrollment.belongs_to
+
+= link_to 'Edit', edit_enrollment_path(@enrollment)
+\|
+= link_to 'Back', enrollments_path
