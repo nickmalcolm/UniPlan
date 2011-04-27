@@ -1,6 +1,44 @@
 %p#notice= notice
 
+%ul
+  - @timetable.enrollments.each do |e|
+    %li
+      #{e.course.name}
+      Stream #{e.stream.crn}
+      %ul
+        - @events.where(:stream_id => e.stream.id).each do |event|
+          %li 
+            #{event.starts_at.strftime('%H:%M')} - #{event.ends_at.strftime('%H:%M')} on #{event.starts_at.strftime('%A')}s in #{event.room}
 
+%ul
+  - @timetable.courses.each do |c|
+    %li
+      #{c.name}
+      
+%table
+  %tbody
+    %tr
+      %th
+      - days.each do |day|
+        %th #{day}
+    - (8..18).each do |hour|
+      %tr{:style=> (hour.odd? ? "background-color:#DDD" : "")}
+        %td #{num_to_12_hr(hour)}
+        - days.each_with_index do |day, i|
+          %td{:id=>"#{day}_#{hour}", :style=> (i.odd? ? "background-color:rgba(0,0,0,0.1)" : "")}
+            - events = @events.where("day_str = ? AND (starts_at_str = ? OR starts_at_str = ?)", day, "#{hour}:0", "#{hour}:10")
+            - unless events.empty?
+              - if events.size > 1
+                %span{:style=>"color:#f00"}
+                  - events.each do |event|
+                    = event.stream.course.name
+                    <br />
+              - else 
+                - events.each do |event|
+                  = event.stream.course.name
+                  <br />
+            
+  
 = link_to 'Edit', edit_timetable_path(@timetable)
 \|
 = link_to 'Back', timetables_path

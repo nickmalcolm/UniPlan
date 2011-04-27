@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110426104330) do
+ActiveRecord::Schema.define(:version => 20110427102639) do
 
   create_table "courses", :force => true do |t|
     t.string   "course"
@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(:version => 20110426104330) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "room"
+    t.string   "starts_at_str"
+    t.string   "ends_at_str"
+    t.string   "day_str"
   end
 
   create_table "streams", :force => true do |t|

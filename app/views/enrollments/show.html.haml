@@ -1,11 +1,11 @@
 %p#notice= notice
 
 %p
-  %b Belongs to:
-  = @enrollment.belongs_to
+  %b Stream:
+  = @enrollment.stream.crn
 %p
-  %b Belongs to:
-  = @enrollment.belongs_to
+  %b Timetable:
+  = @enrollment.timetable
 
 = link_to 'Edit', edit_enrollment_path(@enrollment)
 \|

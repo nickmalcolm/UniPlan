@@ -14,7 +14,9 @@ class TimetablesController < ApplicationController
   # GET /timetables/1.xml
   def show
     @timetable = Timetable.find(params[:id])
-
+    
+    @events = @timetable.events
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @timetable }

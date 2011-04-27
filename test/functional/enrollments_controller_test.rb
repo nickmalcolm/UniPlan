@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EnrollmentsControllerTest < ActionController::TestCase
   setup do
-    @enrollment = enrollments(:one)
+    @enrollment = Factory(:enrollment)
   end
 
   test "should get index" do
@@ -14,14 +14,6 @@ class EnrollmentsControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
-  end
-
-  test "should create enrollment" do
-    assert_difference('Enrollment.count') do
-      post :create, :enrollment => @enrollment.attributes
-    end
-
-    assert_redirected_to enrollment_path(assigns(:enrollment))
   end
 
   test "should show enrollment" do

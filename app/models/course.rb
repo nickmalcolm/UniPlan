@@ -6,7 +6,7 @@ class Course < ActiveRecord::Base
   validates :course, :presence => true
   validates :code, :presence => true
   
-  def short_title
+  def name
     ""+course+code
   end
   

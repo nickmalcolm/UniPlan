@@ -5,9 +5,11 @@
     %th
     %th
     %th
+    %th
 
   - @timetables.each do |timetable|
     %tr
+      %td= timetable.id
       %td= link_to 'Show', timetable
       %td= link_to 'Edit', edit_timetable_path(timetable)
       %td= link_to 'Destroy', timetable, :confirm => 'Are you sure?', :method => :delete

@@ -5,12 +5,5 @@
       %ul
         - @enrollment.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :belongs_to
-    = f.text_field :belongs_to
-  .field
-    = f.label :belongs_to
-    = f.text_field :belongs_to
   .actions
     = f.submit 'Save'

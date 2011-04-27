@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TimetablesControllerTest < ActionController::TestCase
   setup do
-    @timetable = timetables(:one)
+    @timetable = Factory(:timetable)
   end
 
   test "should get index" do

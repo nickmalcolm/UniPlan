@@ -14,3 +14,11 @@ Factory.define :event do |e|
   e.stream { Factory(:stream) }
   e.room "ROOM123"
 end
+
+Factory.define :timetable do |t|
+end
+
+Factory.define :enrollment do |e|
+  e.association :timetable
+  e.association :stream
+end
