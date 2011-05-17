@@ -33,12 +33,35 @@
       background-color: rgba(255,255,255,0.8);
       padding: 30px;
     }
+    input{
+      border-radius:5px;
+    	-moz-border-radius:5px;
+    	-webkit-border-radius:5px;
+    	border: #444 1px solid;
+    	box-shadow:inset 0px 0px 3px #999;
+    	-moz-box-shadow:inset 0px 0px 3px #999;
+    	-webkit-box-shadow:inset 0px 0px 3px #999;
+    	background:#fff;
+    	padding: 5px 5px;
+      width: 300px;
+      font-size: 14px;
+    }
+    label{
+      position: relative;
+      top: 3px;
+    }
   </style>
 </head>
 <body>
   <div id="box">
     <h1>Corsair</h1>
-    The courses you want, when you want.
+    <p>
+      The courses you want, when you want.
+    </p>
+    <form>
+      <label for="email">Keep me posted:</label>
+      <input type="text" name="email" />
+    </form>
   </div>
 </body>
 </html>
