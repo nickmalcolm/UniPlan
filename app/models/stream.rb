@@ -7,4 +7,9 @@ class Stream < ActiveRecord::Base
   
   validates :course, :presence => true
   validates :crn, :presence => true, :uniqueness => true
+  
+  def name
+    "#{crn} #{course.name}"
+  end
+  
 end

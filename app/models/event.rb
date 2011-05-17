@@ -20,12 +20,27 @@ class Event < ActiveRecord::Base
     false
   end
   
+  def name
+    "#{stream.course.name} in #{room}"
+  end
+  
+  def as_json(options={})
+    hash = Hash.new
+    hash[:day] = starts_at.strftime('%A')
+    hash[:starts_hour] = starts_at.strftime('%H')
+    hash[:starts_min] =  starts_at.strftime('%M')
+    hash[:duration] = 50
+    hash[:name] = name
+    hash[:room] = room
+    return hash
+  end
+  
   private
   
     def set_string_times
-      self.starts_at_str  = "#{self.starts_at.hour}:#{self.starts_at.min}"
-      self.ends_at_str    = "#{self.ends_at.hour}:#{self.ends_at.min}"
-      self.day_str = "#{self.starts_at.strftime('%A')}"
+      #starts_at_str  = "#{self.starts_at.strftime('%H:%M')}"
+      #ends_at_str    = "#{self.ends_at.strftime('%H:%M')}"
+      #day_str = "#{self.starts_at.strftime('%A')}"
     end
   
 end

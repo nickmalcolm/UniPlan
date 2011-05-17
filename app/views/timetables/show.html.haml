@@ -1,19 +1,18 @@
 %p#notice= notice
 
-%ul
-  - @timetable.enrollments.each do |e|
-    %li
-      #{e.course.name}
-      Stream #{e.stream.crn}
-      %ul
-        - @events.where(:stream_id => e.stream.id).each do |event|
-          %li 
-            #{event.starts_at.strftime('%H:%M')} - #{event.ends_at.strftime('%H:%M')} on #{event.starts_at.strftime('%A')}s in #{event.room}
+%span{'data-url'=>events_timetable_path(@timetable), :id => 'events'}
 
-%ul
-  - @timetable.courses.each do |c|
-    %li
-      #{c.name}
+:javascript
+  console.log($("#events").attr("data-url"));
+  $.getJSON($("#events").attr("data-url"), 
+    function (data) {
+      $(data).each(function(i, event){
+        starts_hour = event.starts_hour
+        day = event.day
+        id = "#"+day+"_"+starts_hour
+        $(id).append(event.name+"<br />")
+      });
+   });
       
 %table
   %tbody
@@ -25,18 +24,8 @@
       %tr{:style=> (hour.odd? ? "background-color:#DDD" : "")}
         %td #{num_to_12_hr(hour)}
         - days.each_with_index do |day, i|
-          %td{:id=>"#{day}_#{hour}", :style=> (i.odd? ? "background-color:rgba(0,0,0,0.1)" : "")}
-            - events = @events.where("day_str = ? AND (starts_at_str = ? OR starts_at_str = ?)", day, "#{hour}:0", "#{hour}:10")
-            - unless events.empty?
-              - if events.size > 1
-                %span{:style=>"color:#f00"}
-                  - events.each do |event|
-                    = event.stream.course.name
-                    <br />
-              - else 
-                - events.each do |event|
-                  = event.stream.course.name
-                  <br />
+          %td{:id=>"#{day}_#{'%02d' % hour}", :style=> (i.odd? ? "background-color:rgba(0,0,0,0.1)" : "")}
+            
             
   
 = link_to 'Edit', edit_timetable_path(@timetable)

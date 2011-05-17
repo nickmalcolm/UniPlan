@@ -13,13 +13,19 @@ class TimetablesController < ApplicationController
   # GET /timetables/1
   # GET /timetables/1.xml
   def show
-    @timetable = Timetable.find(params[:id])
+    @timetable = Timetable.preload(:enrollments, :streams).find(params[:id])
     
-    @events = @timetable.events
     
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @timetable }
+    end
+  end
+  
+  def events
+    @events = Timetable.find(params[:id]).events
+    respond_to do |format|
+      format.json  { render :json => @events }
     end
   end
 

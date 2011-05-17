@@ -1,14 +1,11 @@
 class Timetable < ActiveRecord::Base
   
   has_many :enrollments
+  has_many :events, :through => :enrollments
   has_many :streams, :through => :enrollments
   
-  def courses
-    Course.joins(:streams => :timetables).where("timetable_id = #{self.id}").group('timetables.id')
-  end
-  
   def events
-    Event.joins(:stream => :timetables).where("timetable_id = #{self.id}")
+    Event.find(:all, :conditions => ["stream_id IN (?)", self.streams.collect {|s| s.id }])
   end
   
 end

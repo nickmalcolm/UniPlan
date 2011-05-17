@@ -1,7 +1,11 @@
 Uniplanner::Application.routes.draw do
   resources :enrollments
 
-  resources :timetables
+  resources :timetables do
+    member do
+      get :events
+    end
+  end
 
   root :to => "home#index"
 
