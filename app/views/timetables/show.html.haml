@@ -10,7 +10,8 @@
         starts_hour = event.starts_hour
         day = event.day
         id = "#"+day+"_"+starts_hour
-        $(id).append(event.name+"<br />")
+        html = "<a href='"+event.url+"' title='"+event.name+"'>"+event.name+"</a><br />"
+        $(id).append(html)
       });
    });
       

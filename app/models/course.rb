@@ -6,6 +6,10 @@ class Course < ActiveRecord::Base
   validates :course, :presence => true
   validates :code, :presence => true
   
+  def to_param
+    "#{id}-#{name}"
+  end
+  
   def name
     ""+course+code
   end

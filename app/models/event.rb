@@ -32,6 +32,7 @@ class Event < ActiveRecord::Base
     hash[:duration] = 50
     hash[:name] = name
     hash[:room] = room
+    hash[:url] = "/courses/"+stream.course.to_param
     return hash
   end
   
