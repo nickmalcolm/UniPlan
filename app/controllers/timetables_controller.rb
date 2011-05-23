@@ -3,10 +3,10 @@ class TimetablesController < ApplicationController
   # GET /timetables.xml
   def index
     @timetables = Timetable.all
+    @courses = Course.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @timetables }
     end
   end
 
@@ -18,7 +18,6 @@ class TimetablesController < ApplicationController
     
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @timetable }
     end
   end
   

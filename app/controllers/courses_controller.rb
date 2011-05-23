@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @courses }
+      format.json  { render :json => @courses }
     end
   end
 
