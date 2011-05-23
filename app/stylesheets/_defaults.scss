@@ -18,13 +18,7 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased; }
 
-.serif {
-  @include chunk-family; }
-
-.sans {
-  @include chunk-family; }
-
-.mono {
+.chunk {
   @include chunk-family; }
 
 .caps {
@@ -41,8 +35,12 @@ html {
 /* Body -------------------------------------------------------------- */
 
 body {
-  
-  color: $base; }
+  color: $base; 
+  font: {
+    family: Georgia;
+    size: 15px;
+	}
+}
 
 /* Selected Text -------------------------------------------------------------- */
 /* -moz- must be declared separately */
@@ -85,7 +83,7 @@ h2, h3, h4, h5, h6 {
 
 h1 {	
 	font-family: "ChunkFiveRegular";
-  @include adjust-font-size-to(21px);
+  @include adjust-font-size-to(25px);
   @include trailer(1, 21px);
 }
 
@@ -149,7 +147,8 @@ pre, code, tt {
 /* Block -------------------------------------------------------------- */
 
 p {
-  @include trailer; }
+  @include trailer;
+}
 
 pre {
   margin: $base-rhythm-unit;
