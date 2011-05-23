@@ -1,3 +1,5 @@
+%h1#title Unicourse
+
 %p#notice= notice
 
 %span{'data-url'=>events_timetable_path(@timetable), :id => 'events'}
@@ -20,10 +22,10 @@
     %tr
       %th
       - days.each do |day|
-        %th #{day}
+        %th.chunk #{day}
     - (8..18).each do |hour|
       %tr{:style=> (hour.odd? ? "background-color:#DDD" : "")}
-        %td #{num_to_12_hr(hour)}
+        %td.chunk #{num_to_12_hr(hour)}
         - days.each_with_index do |day, i|
           %td{:id=>"#{day}_#{'%02d' % hour}", :style=> (i.odd? ? "background-color:rgba(0,0,0,0.1)" : "")}
             
